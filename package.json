@@ -22,13 +22,13 @@
   },
   "homepage": "https://github.com/Igogoblin/sliderPlugin#readme",
   "dependencies": {
-    "@types/jquery": "^3.5.32",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.31.0",
     "jquery": "^3.7.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.32",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
     "webpack": "^5.99.9",

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="demo-slider" id="slider1"></div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../dist/bundle.js"></script>
+    <script>
+        $('#slider1').mySlider({
+            min: 0,
+            max: 100,
+            step: 5,
+            values: [25]
+        });
+    </script>
+</body>
+
+</html>

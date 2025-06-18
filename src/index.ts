@@ -1,0 +1,20 @@
+import { SliderPresenter } from "./presenter/SliderPresenter";
+import { SliderModel } from "./model/SliderModel";
+import { SliderView } from "./view/SliderView";
+
+declare global {
+  interface JQuery {
+    mySlider(options: any): JQuery;
+  }
+}
+
+(function ($) {
+  $.fn.mySlider = function (options: any) {
+    return this.each(function () {
+      const root = this as HTMLElement;
+      const model = new SliderModel(options);
+      const view = new SliderView(root);
+      new SliderPresenter(model, view);
+    });
+  };
+})(jQuery);
