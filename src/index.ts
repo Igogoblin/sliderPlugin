@@ -1,6 +1,7 @@
 import { SliderPresenter } from "./presenter/SliderPresenter";
 import { SliderModel } from "./model/SliderModel";
 import { SliderView } from "./view/SliderView";
+import "./view/sliderView.css";
 
 declare global {
   interface JQuery {
@@ -21,4 +22,12 @@ declare global {
 
 $(function () {
   $("#slider-container").text("slider initialized");
+});
+$(function () {
+  $("#slider-root").mySlider({
+    min: 0,
+    max: 100,
+    step: 1,
+    value: 50,
+  });
 });
