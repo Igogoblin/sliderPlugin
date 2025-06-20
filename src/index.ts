@@ -18,3 +18,7 @@ declare global {
     });
   };
 })(jQuery);
+
+$(function () {
+  $("#slider-container").text("slider initialized");
+});
