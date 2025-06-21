@@ -3,4 +3,5 @@ export declare class SliderView {
     constructor(root: HTMLElement);
     render(): void;
     updateHandlePosition(position: number): void;
+    registerEvens(): void;
 }

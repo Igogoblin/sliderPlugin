@@ -14601,7 +14601,7 @@ $(function () {
         min: 0,
         max: 100,
         step: 1,
-        value: 50,
+        values: [50],
     });
 });
 
@@ -14620,11 +14620,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SliderModel: () => (/* binding */ SliderModel)
 /* harmony export */ });
 class SliderModel {
-    constructor({ min, max, step, values, }) {
+    constructor({ min, max, step, values, value, }) {
         this.min = min;
         this.max = max;
         this.step = step;
-        this.values = values;
+        this.values = values !== null && values !== void 0 ? values : (value !== undefined ? [value] : [min]);
     }
     getValues() {
         return this.values;
@@ -14662,7 +14662,8 @@ class SliderPresenter {
     }
     init() {
         const [min, max] = this.model.getRange();
-        const value = this.model.getValues()[0];
+        const values = this.model.getValues();
+        const value = values && values.length > 0 ? values[0] : min;
         const percentage = ((value - min) / (max - min)) * 100;
         this.view.updateHandlePosition(percentage);
     }
@@ -14686,6 +14687,8 @@ class SliderView {
     constructor(root) {
         this.root = root;
         this.render();
+        this.registerEvens();
+        // this.updateHandlePosition(0); // Initialize handle position
     }
     render() {
         this.root.innerHTML = `
@@ -14700,6 +14703,30 @@ class SliderView {
         if (handle) {
             handle.style.left = `${position}%`;
         }
+    }
+    registerEvens() {
+        const handle = this.root.querySelector(".slider-handle");
+        const track = this.root.querySelector(".slider-track");
+        handle.addEventListener("mousedown", (event) => {
+            const onMouseMove = (e) => {
+                const rect = track.getBoundingClientRect();
+                const offsetX = e.clientX - rect.left;
+                const percentage = Math.max(0, Math.min(1, offsetX / rect.width));
+                this.updateHandlePosition(percentage * 100);
+            };
+            const onMouseUp = () => {
+                document.removeEventListener("mousemove", onMouseMove);
+                document.removeEventListener("mouseup", onMouseUp);
+            };
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+        });
+        track.addEventListener("click", (event) => {
+            const rect = track.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(1, offsetX / rect.width));
+            this.updateHandlePosition(percentage * 100);
+        });
     }
 }
 
@@ -14890,7 +14917,7 @@ if (true) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("6306d149dc59f9efca63")
+/******/ 		__webpack_require__.h = () => ("d16e8d4004145b44475d")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

@@ -7,7 +7,8 @@ export class SliderPresenter {
   }
   private init(): void {
     const [min, max] = this.model.getRange();
-    const value = this.model.getValues()[0];
+    const values = this.model.getValues();
+    const value = values && values.length > 0 ? values[0] : min;
     const percentage = ((value - min) / (max - min)) * 100;
     this.view.updateHandlePosition(percentage);
   }

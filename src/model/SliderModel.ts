@@ -2,23 +2,26 @@ export class SliderModel {
   private min: number;
   private max: number;
   private step: number;
-  private values: number[];
+  private values?: number[];
+  private value?: number;
 
   constructor({
     min,
     max,
     step,
     values,
+    value,
   }: {
     min: number;
     max: number;
     step: number;
-    values: number[];
+    values?: number[];
+    value?: number;
   }) {
     this.min = min;
     this.max = max;
     this.step = step;
-    this.values = values;
+    this.values = values ?? (value !== undefined ? [value] : [min]);
   }
 
   getValues() {
